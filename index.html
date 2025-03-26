@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio Transcription</title>
+</head>
+<body>
+    <h1>Upload Audio for Transcription</h1>
+
+    <form id="uploadForm">
+        <input type="file" id="audioFile" accept=".mp3, .wav" required>
+        <button type="submit">Upload and Transcribe</button>
+    </form>
+
+    <h3>Transcription Result:</h3>
+    <p id="transcriptionResult">No transcription yet.</p>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const resultPara = document.getElementById('transcriptionResult');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('audioFile');
+            const file = fileInput.files[0];
+
+            const formData = new FormData();
+            formData.append('file', file);
+            resultPara.innerText = "Transcribing... Please wait.";
+
+            fetch('http://127.0.0.1:8000/transcribe/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Transcription failed.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                resultPara.innerText = data.transcription;
+            })
+            .catch(error => {
+                resultPara.innerText = error.message;
+            });
+        });
+    </script>
+</body>
+</html>
+
