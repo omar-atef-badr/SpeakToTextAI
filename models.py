@@ -1,11 +1,13 @@
-from sqlalchemy import Column, Integer, String
-from database import Base
-from pydantic import BaseModel
+# from sqlalchemy import Column, Integer, String
+# from database import Base  # or from .database if using packages
+#
+# class Note(Base):
+#     __tablename__ = "notes"
+#
+#     id = Column(Integer, primary_key=True, index=True)
+#     title = Column(String, nullable=False)
+#     content = Column(String, nullable=False)
 
-class Transcription(Base):
-    __tablename__ = "transcriptions"
-    id = Column(Integer, primary_key=True, index=True)
-    text = Column(String, nullable=False)
 
 
 
