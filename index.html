@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="./styles.css"/>
   <meta charset="UTF-8">
-  <title>Live Voice to Lyrics</title>
 </head>
 <body>
-  <h1>Live Voice to Lyrics</h1>
 
-  <button id="startBtn">🎙️ Start Recording</button>
-  <button id="stopBtn" disabled>⏹️ Stop Recording</button>
+
+  <button  class="record-btn"  id="startBtn">
+         <span class="mic-icon">🎤</span> Start Recording
+  </button>
+
+  <button class="stop-button" id="stopBtn" >
+      <span class="stop-icon">⏹️</span> Stop Recording
+  </button>
+
 
   <p id="status">Click "Start Recording" to begin.</p>
   <h3>Transcription:</h3>
   <p id="transcriptionResult">No transcription yet.</p>
-
 
 
 

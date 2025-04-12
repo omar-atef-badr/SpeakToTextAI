@@ -56,6 +56,21 @@ startBtn.addEventListener('click', async () => {
 stopBtn.addEventListener('click', () => {
   if (mediaRecorder && mediaRecorder.state === "recording") {
     mediaRecorder.stop();
-    status.textContent = "Stopping recording...";
   }
 });
+
+const btn = document.getElementById('startBtn');
+
+btn.addEventListener('click', () => {
+  const isRecording = btn.classList.toggle('recording');
+
+  if (isRecording) {
+    btn.innerHTML = '<span class="mic-icon">🎤</span> Start recording';
+    // removed backgroundColor change
+  }
+  else {
+    btn.innerHTML = '<span class="mic-icon">🎤</span> Start recording';
+    // removed backgroundColor change
+  }
+});
+
