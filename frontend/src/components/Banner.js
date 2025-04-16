@@ -8,7 +8,7 @@ import TrackVisibility from 'react-on-screen';
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const toRotate = [ "clarity", "action", "ideas" ];
+  const toRotate = [ "text", "action", "ideas" ];
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(150 - Math.random() * 50);
   const [index, setIndex] = useState(1);
@@ -56,7 +56,7 @@ export const Banner = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Speak freely, capture clearly</span>
-                <h1>{`Turn your voice into`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "clarity", "action", "ideas" ]'><span className="wrap">{text}</span></span></h1>
+                <h1>{`Turn your voice into`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "text", "action", "ideas" ]'><span className="wrap">{text}</span></span></h1>
                   {/*<p>Real-time speech-to-text that’s fast, accurate, and effortless.</p>*/}
                   <button onClick={() => console.log('connect')}>Let’s Try it out! <ArrowRightCircle size={25} /></button>
               </div>}
