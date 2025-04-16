@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import logo from '../assets/img/logo.svg';
-import navIcon1 from '../assets/img/nav-icon1.svg';
+import navIcon1 from '../assets/img/github.png';
 
 /*import { HashLink } from 'react-router-hash-link';
 import {
@@ -49,7 +48,7 @@ export const NavBar = () => {
             </Nav>
             <span className="navbar-text">
               <div className="social-icon">
-                <a href="#"><img src={navIcon1} alt="" /></a>
+                <a href="https://github.com/omar-atef-badr/SpeakToTextAI"><img src={navIcon1} alt="" /></a>
               </div>
               {/*
               <HashLink to='#connect'>
