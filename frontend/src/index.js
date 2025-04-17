@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+import axios from 'axios';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -15,3 +18,12 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+const getData = async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/your-endpoint');
+    console.log(response.data);
+  } catch (err) {
+    console.error('Error fetching data:', err);
+  }
+};

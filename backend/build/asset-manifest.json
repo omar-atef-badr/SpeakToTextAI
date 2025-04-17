@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.92b1054a.css",
+    "main.js": "/static/js/main.b2be4916.js",
+    "static/js/453.8ab44547.chunk.js": "/static/js/453.8ab44547.chunk.js",
+    "static/media/color-sharp.png": "/static/media/color-sharp.bea361cfef80fefc2d1e.png",
+    "static/media/waves.jpg": "/static/media/waves.3153db1ea837781150ad.jpg",
+    "static/media/CentraNo2-Bold.ttf": "/static/media/CentraNo2-Bold.2faff7f7d3fc92a2fcd9.ttf",
+    "static/media/CentraNo2-Medium.ttf": "/static/media/CentraNo2-Medium.f94be5b326d78bb32b95.ttf",
+    "static/media/CentraNo2-Book.ttf": "/static/media/CentraNo2-Book.2b143fa4b734a3584043.ttf",
+    "static/media/contact-img.svg": "/static/media/contact-img.62aa99e0f3b968b5d1ce9eb047f34fc7.svg",
+    "static/media/nice_icon.svg": "/static/media/nice_icon.4d0708c7d65d414fbb334ff6f46f6b64.svg",
+    "static/media/github.png": "/static/media/github.4432f0428363b4e194bf.png",
+    "static/media/websocket.svg": "/static/media/websocket.8bb9b363236007540de4ad9ed66c13d8.svg",
+    "index.html": "/index.html",
+    "main.92b1054a.css.map": "/static/css/main.92b1054a.css.map",
+    "main.b2be4916.js.map": "/static/js/main.b2be4916.js.map",
+    "453.8ab44547.chunk.js.map": "/static/js/453.8ab44547.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92b1054a.css",
+    "static/js/main.b2be4916.js"
+  ]
+}
