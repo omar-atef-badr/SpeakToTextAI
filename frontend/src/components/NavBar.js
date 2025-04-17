@@ -43,12 +43,14 @@ export const NavBar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
-              <Nav.Link href="#demo" className={activeLink === 'demo' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('demo')}>Demo</Nav.Link>
               <Nav.Link href="#about" className={activeLink === 'about' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('about')}>About</Nav.Link>
+              <Nav.Link href="#demo" className={activeLink === 'demo' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('demo')}>Demo</Nav.Link>
             </Nav>
             <span className="navbar-text">
               <div className="social-icon">
-                <a href="https://github.com/omar-atef-badr/SpeakToTextAI"><img src={navIcon1} alt="" /></a>
+                <a href="https://github.com/omar-atef-badr/SpeakToTextAI" target="_blank" rel="noopener noreferrer">
+                  <img src={navIcon1} alt="GitHub" />
+                </a>
               </div>
               {/*
               <HashLink to='#connect'>
