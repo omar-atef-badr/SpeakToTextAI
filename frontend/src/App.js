@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavBar } from "./components/NavBar";
 import { Banner } from "./components/Banner";
 import { About } from "./components/About";
-import { Contact } from "./components/Contact";
+import { Demo } from "./components/Demo";
 import { Footer } from "./components/Footer";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <NavBar />
       <Banner />
       <About />
-      <Contact />
+      <Demo />
       <Footer />
     </div>
   );
