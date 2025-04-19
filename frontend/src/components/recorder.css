@@ -1,0 +1,30 @@
+.styled-heading {
+    text-align: center;            /* Centers the text */
+    font-family: 'Times New Roman', sans-serif; /* Font style */
+    font-size: 2rem;              /* Adjusts the size */
+    font-weight: bold;           /* Makes it bold */
+    color: white;                 /* Dark gray color */
+    letter-spacing: 1px;         /* Space between letters */
+    text-transform: uppercase;   /* Makes all letters uppercase */
+  }
+
+.demo-header button {
+  font-size: 1.5rem;      /* Bigger button text & emojis */
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #444;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.demo-header button:hover {
+  background-color: #666;
+}
+
+.demo-header button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

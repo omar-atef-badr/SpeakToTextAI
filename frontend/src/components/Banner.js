@@ -58,7 +58,22 @@ export const Banner = () => {
                 <span className="tagline">Speak freely, capture clearly</span>
                 <h1>{`Turn your voice into`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "text", "action", "ideas" ]'><span className="wrap">{text}</span></span></h1>
                   {/*<p>Real-time speech-to-text that’s fast, accurate, and effortless.</p>*/}
-                  <button onClick={() => console.log('connect')}>Let’s Try it out! <ArrowRightCircle size={25} /></button>
+
+
+                  {/*the button that direct to the recorde*/}
+                    <button
+                      onClick={() => {
+                      console.log("Scroll button clicked!");
+                      const demoSection = document.getElementById("demo");
+                      if (demoSection) {
+                          demoSection.scrollIntoView({ behavior: 'smooth' });
+                            } else {
+                              console.log("Couldn't find #demo element.");
+                            }
+                              }}
+>
+  Let’s Try it out! <ArrowRightCircle size={25} />
+</button>
               </div>}
             </TrackVisibility>
           </Col>
