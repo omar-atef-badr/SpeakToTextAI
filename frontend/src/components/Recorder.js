@@ -2,67 +2,75 @@ import React, { useState, useRef } from 'react';
 import './recorder.css';
 
 const Recorder = () => {
-  const [status, setStatus]          = useState('Click "Start" to begin.');
-  const [transcript, setTranscript]  = useState('No transcription yet.');
+  const [status, setStatus] = useState('Click "Start" to begin.');
+  const [transcript, setTranscript] = useState('');
   const [isRecording, setIsRecording] = useState(false);
 
-  const mediaRecorderRef = useRef(null);
-  const chunksRef        = useRef([]);
+  const socketRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const processorRef = useRef(null);
+  const streamRef = useRef(null);
 
-  /* ───── helpers ───── */
-  const chooseMime = () =>
-    MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
-      ? 'audio/webm;codecs=opus'
-      : 'audio/webm';
-
-  /* ───── start ───── */
   const startRecording = async () => {
-    chunksRef.current = [];
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const mediaRecorder = new MediaRecorder(stream, { mimeType: chooseMime() });
+    setTranscript('');
+    setStatus('Initializing...');
 
-    mediaRecorder.ondataavailable = e =>
-      e.data.size && chunksRef.current.push(e.data);
+    const socket = new WebSocket("ws://localhost:8000/ws/transcribe");
+    socket.binaryType = "arraybuffer";
+    socketRef.current = socket;
 
-    mediaRecorder.start();                     // one long recording
-    mediaRecorderRef.current = mediaRecorder;
+    socket.onopen = async () => {
+      setStatus('Recording and streaming...');
+      setIsRecording(true);
 
-    setIsRecording(true);
-    setStatus('Recording…');
-    setTranscript('No transcription yet.');
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
+
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      audioContextRef.current = audioContext;
+
+      const source = audioContext.createMediaStreamSource(stream);
+      const processor = audioContext.createScriptProcessor(4096, 1, 1);
+      processorRef.current = processor;
+
+      source.connect(processor);
+      processor.connect(audioContext.destination);
+
+      processor.onaudioprocess = (e) => {
+        const input = e.inputBuffer.getChannelData(0); // Float32Array
+        const buffer = new Int16Array(input.length);
+        for (let i = 0; i < input.length; i++) {
+          buffer[i] = Math.max(-1, Math.min(1, input[i])) * 32767; // Clamp + convert to Int16
+        }
+        if (socket.readyState === WebSocket.OPEN) {
+          socket.send(buffer.buffer); // Send raw audio buffer
+        }
+      };
+    };
+
+    socket.onmessage = (event) => {
+      setTranscript(prev => prev + event.data + ' ');
+    };
+
+    socket.onerror = () => setStatus('WebSocket error');
+    socket.onclose = () => {
+      setStatus('WebSocket closed');
+      setIsRecording(false);
+    };
   };
 
-  /* ───── stop & upload ───── */
- const stopRecording = () => {
-  if (!isRecording) return;
+  const stopRecording = () => {
+    setIsRecording(false);
+    setStatus('Stopped');
 
-  setIsRecording(false);
-  setStatus('Stopping recorder…');
+    processorRef.current?.disconnect();
+    audioContextRef.current?.close();
 
-  /* wait for onstop to fire */
-  mediaRecorderRef.current.onstop = () => {
-    setStatus('Encoding & uploading…');
+    streamRef.current?.getTracks().forEach(track => track.stop());
 
-    const blob = new Blob(chunksRef.current, { type: chooseMime() });
-
-    const form = new FormData();
-    form.append('file', blob, 'audio.webm');
-
-    fetch('/transcribe', { method: 'POST', body: form })
-      .then(r => r.json())
-      .then(({ text }) => {
-        setTranscript(text || '[empty]');
-        setStatus('Done!');
-      })
-      .catch(() => setStatus('Upload or server error'));
+    socketRef.current?.close();
   };
 
-  /* now actually stop (will trigger onstop above) */
-  mediaRecorderRef.current.stop();
-};
-
-
-  /* ───── UI ───── */
   return (
     <div id="demo">
       <h2 className="styled-heading">Live Demo</h2>
@@ -83,3 +91,5 @@ const Recorder = () => {
 };
 
 export default Recorder;
+
+
