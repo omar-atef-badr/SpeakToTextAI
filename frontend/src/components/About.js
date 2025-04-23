@@ -46,9 +46,15 @@ export const About = () => {
                                     with exceptional accuracy, this project marks the beginning of Omar's and Ali's 
                                     journey in creating impactful AI-driven solutions.
                                   </p>
-                                  <div className="interactive-callout">
-                                    <div className="pulse-icon">▶</div>
-                                    <p>Click to watch our demo</p>
+                                  <div className="video-container">
+                                    <div className="video-play-button">
+                                      <div className="play-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                          <polygon points="5,3 19,12 5,21" />
+                                        </svg>
+                                      </div>
+                                      <div className="video-title">Click to watch our demo</div>
+                                    </div>
                                   </div>
                                 </div>
                               </Tab.Pane>

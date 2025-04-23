@@ -72,3 +72,6 @@ async def websocket_transcribe(websocket: WebSocket):
     except Exception as e:
         print("WebSocket error:", e)
         await websocket.close()
+
+
+#whilst you are on video call perhaps capture audio??
