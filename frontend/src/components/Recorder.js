@@ -8,7 +8,7 @@ const Recorder = () => {
 
   const socketRef = useRef(null);
   const audioContextRef = useRef(null);
-  const processorRef = useRef(null);
+  const workletRef = useRef(null);
   const streamRef = useRef(null);
 
   const startRecording = async () => {
@@ -29,23 +29,21 @@ const Recorder = () => {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       audioContextRef.current = audioContext;
 
+      await audioContext.audioWorklet.addModule(process.env.PUBLIC_URL + '/processor.js');
+
       const source = audioContext.createMediaStreamSource(stream);
-      const processor = audioContext.createScriptProcessor(4096, 1, 1);
-      processorRef.current = processor;
+      const workletNode = new AudioWorkletNode(audioContext, 'my-processor');
+      workletRef.current = workletNode;
 
-      source.connect(processor);
-      processor.connect(audioContext.destination);
-
-      processor.onaudioprocess = (e) => {
-        const input = e.inputBuffer.getChannelData(0); // Float32Array
-        const buffer = new Int16Array(input.length);
-        for (let i = 0; i < input.length; i++) {
-          buffer[i] = Math.max(-1, Math.min(1, input[i])) * 32767; // Clamp + convert to Int16
-        }
+      workletNode.port.onmessage = (event) => {
+        const buffer = event.data;
         if (socket.readyState === WebSocket.OPEN) {
-          socket.send(buffer.buffer); // Send raw audio buffer
+          socket.send(buffer.buffer);
         }
       };
+
+      source.connect(workletNode);
+      workletNode.connect(audioContext.destination); // Optional
     };
 
     socket.onmessage = (event) => {
@@ -63,11 +61,10 @@ const Recorder = () => {
     setIsRecording(false);
     setStatus('Stopped');
 
-    processorRef.current?.disconnect();
+    workletRef.current?.disconnect();
     audioContextRef.current?.close();
 
     streamRef.current?.getTracks().forEach(track => track.stop());
-
     socketRef.current?.close();
   };
 
@@ -91,5 +88,6 @@ const Recorder = () => {
 };
 
 export default Recorder;
+
 
 
