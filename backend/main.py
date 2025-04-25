@@ -1,4 +1,3 @@
-
 # backend/main.py
 import tempfile, whisper
 from pathlib import Path
@@ -73,39 +72,3 @@ async def websocket_transcribe(websocket: WebSocket):
     except Exception as e:
         print("WebSocket error:", e)
         await websocket.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
