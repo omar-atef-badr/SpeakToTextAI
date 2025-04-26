@@ -73,5 +73,4 @@ async def websocket_transcribe(websocket: WebSocket):
         print("WebSocket error:", e)
         await websocket.close()
 
-
-#whilst you are on video call perhaps capture audio??
+##Next steps - capture audio even when on a video call with someone else?
