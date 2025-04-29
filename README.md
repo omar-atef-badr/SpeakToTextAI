@@ -1,4 +1,4 @@
-# SpeakToTextAI
+# TalkToTexty (originally was SpeakToTextAI)
 
 A real-time speech-to-text web application powered by AI.
 
@@ -14,7 +14,7 @@ A real-time speech-to-text web application powered by AI.
 
 ## Overview
 
-SpeakToTextAI is a real-time speech-to-text application leveraging state-of-the-art AI models. This project uses OpenAI Whisper for speech recognition and provides a simple, responsive web interface built with React.
+TalkToTexty is a real-time speech-to-text application leveraging state-of-the-art AI models. This project uses OpenAI Whisper for speech recognition and provides a simple, responsive web interface built with React.
 
 ## Features
 
