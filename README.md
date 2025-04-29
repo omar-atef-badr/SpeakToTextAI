@@ -55,6 +55,20 @@ Ensure you have the following installed:
     npm i react-on-screen
     npm install axios
     ```
+### Directory Layout
+Ensure your directory looks something like the following: 
+
+```
+SpeakToTextAI/
+├── backend/
+│   └── main.py          # Entry point for the FastAPI backend
+│
+└── frontend/
+    ├── public/          # Public assets for the React app
+    ├── src/             # React source code
+    ├── package.json     # NPM dependencies and scripts for the frontend
+    └── ...              # Additional files (e.g., README.md, node_modules/, etc.)
+```
 
 ### Backend Setup
 
